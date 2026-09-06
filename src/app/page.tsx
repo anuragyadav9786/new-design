@@ -18,6 +18,19 @@ import RedesignFooter from "@/components/redesign/redesign-footer";
 export const metadata: Metadata = {
   title: "ThinkFin — Invest With Purpose",
   description: "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "ThinkFin — Invest With Purpose",
+    description: "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ThinkFin — Invest With Purpose",
+    description: "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
+  },
 };
 
 export default function Home() {

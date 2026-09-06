@@ -69,17 +69,22 @@ export default function LeadCaptureModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent
+        className="rounded-[var(--tf-radius-lg)] border-[var(--tf-border)] bg-white p-8 shadow-[0_25px_70px_rgba(var(--tf-navy-rgb),0.2)] sm:max-w-md"
+        style={{ fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif" }}
+      >
         {isSubmitted ? (
           <div className="flex flex-col items-center gap-3 py-6 text-center">
-            <CheckCircle2 className="h-10 w-10 text-primary" />
-            <p className="font-medium">Thanks! Taking you to complete your {goalLabel} plan...</p>
+            <CheckCircle2 className="h-10 w-10 text-[var(--tf-blue)]" />
+            <p className="font-medium text-[var(--tf-navy)]">Thanks! Taking you to complete your {goalLabel} plan...</p>
           </div>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="font-headline text-xl">Get Your Free {goalLabel} Plan</DialogTitle>
-              <DialogDescription className="text-left pt-1">
+              <DialogTitle className="text-xl font-bold text-[var(--tf-navy)]">
+                Get Your Free {goalLabel} Plan
+              </DialogTitle>
+              <DialogDescription className="pt-1 text-left text-[var(--tf-text-secondary)]">
                 Share your details and our advisor will review your goal and send you a personalised recommendation.
               </DialogDescription>
             </DialogHeader>
@@ -91,7 +96,12 @@ export default function LeadCaptureModal() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Your Name" {...field} disabled={isSubmitting} />
+                        <Input
+                          placeholder="Your Name"
+                          {...field}
+                          disabled={isSubmitting}
+                          className="h-11 rounded-[var(--tf-radius-xs)] border-[var(--tf-border)] focus-visible:ring-[var(--tf-blue)]"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -103,13 +113,22 @@ export default function LeadCaptureModal() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Your Email" {...field} disabled={isSubmitting} />
+                        <Input
+                          placeholder="Your Email"
+                          {...field}
+                          disabled={isSubmitting}
+                          className="h-11 rounded-[var(--tf-radius-xs)] border-[var(--tf-border)] focus-visible:ring-[var(--tf-blue)]"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="h-12 w-full rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] text-[15px] font-semibold text-white shadow-[0_10px_30px_rgba(var(--tf-blue-rgb),0.3)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-hover)]"
+                >
                   {isSubmitting ? "Submitting..." : "Get My Free Plan"}
                 </Button>
               </form>
