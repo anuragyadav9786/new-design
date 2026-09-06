@@ -7,6 +7,8 @@ import { goalPortfolios } from "@/components/landing/goal-portfolios";
 import { goalVisuals } from "@/components/redesign/data";
 import { constants } from "@/components/common/constants";
 
+const ALLOCATION_COLORS = ["bg-white", "bg-[var(--tf-blue-tint)]", "bg-white/30"];
+
 export default function GoalGrid() {
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref, { threshold: 0.1 });
@@ -50,12 +52,44 @@ export default function GoalGrid() {
                 />
                 <div className="absolute inset-x-0 bottom-0 p-4">
                   <h3 className="text-sm font-bold text-white sm:text-base">{goal.name}</h3>
-                  <p className="mt-1 max-h-0 overflow-hidden text-[11px] leading-snug text-white/75 opacity-0 transition-all duration-300 group-hover:mt-1.5 group-hover:max-h-16 group-hover:opacity-100">
-                    {visual.tagline}
-                  </p>
-                  <div className="mt-2 flex max-h-0 items-center gap-1 overflow-hidden text-xs font-semibold text-white opacity-0 transition-all duration-300 group-hover:max-h-8 group-hover:opacity-100">
-                    Start plan
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+
+                  <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:mt-2 group-hover:max-h-[140px] group-hover:opacity-100">
+                    <p className="text-[11px] leading-snug text-white/75 line-clamp-1">{visual.tagline}</p>
+
+                    <div className="mt-2 flex items-center justify-between gap-2">
+                      <p className="text-[11px] font-semibold text-[var(--tf-blue-tint)]">{goal.target}</p>
+                      <p className="shrink-0 text-[9px] font-medium uppercase tracking-wide text-white/60">
+                        {goal.horizon}
+                      </p>
+                    </div>
+
+                    <div className="mt-2 flex h-1 w-full overflow-hidden rounded-full bg-white/15">
+                      {goal.allocation.map((slice, i) => (
+                        <div
+                          key={slice.label}
+                          className={ALLOCATION_COLORS[i % ALLOCATION_COLORS.length]}
+                          style={{ width: `${slice.pct}%` }}
+                          title={`${slice.label} ${slice.pct}%`}
+                        />
+                      ))}
+                    </div>
+                    <p className="mt-1 flex flex-wrap gap-x-1.5 text-[9px] text-white/60">
+                      {goal.allocation.map((slice) => (
+                        <span key={slice.label}>
+                          {slice.label} {slice.pct}%
+                        </span>
+                      ))}
+                    </p>
+
+                    <p className="mt-2 truncate text-[10px] text-white/70">
+                      <span className="text-white/45">Top pick </span>
+                      {goal.topFund}
+                    </p>
+
+                    <div className="mt-2 flex items-center gap-1 text-xs font-semibold text-white">
+                      Start plan
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </div>
                   </div>
                 </div>
               </Link>
