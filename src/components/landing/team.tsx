@@ -2,75 +2,73 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { cn } from "@/lib/utils";
 
 const teamMembers = [
-  {
-    name: "Yogesh Singh Tanwar",
-    role: "Chief Technical Officer",
-    bio: "Builds and runs the platform behind ThinkFin, focused on making the investing experience simple and transparent.",
-    image: "/our-team/yogesh-tanwar.jpg",
-    dataAiHint: "man professional",
-  },
   {
     name: "Hony Lt OP Singh Yadav",
     role: "IRDAI Certified Insurance Advisor",
     bio: "Helps investors size the right protection cover for their family before recommending where a single rupee goes toward growth.",
     image: "/our-team/om-prakash.jpg",
-    dataAiHint: "man professional",
   },
   {
     name: "Anurag Singh",
     role: "AMFI Registered Mutual Fund Distributor",
     bio: "Works directly with investors to turn their goals into a structured, goal-based mutual fund portfolio.",
     image: "/our-team/anurag-singh.jpg",
-    dataAiHint: "man turban",
   },
 ];
 
 export default function Team() {
   const ref = useRef<HTMLDivElement>(null);
-  const isIntersecting = useIntersectionObserver(ref, { threshold: 0.1 });
+  const isIntersecting = useIntersectionObserver(ref, { threshold: 0.15 });
 
   return (
-    <section id="team" ref={ref} className="w-full py-20 md:py-24 lg:py-32">
-      <div className="container max-w-7xl px-4 md:px-6 mx-auto">
-        <div 
-          className={cn("flex flex-col items-center justify-center space-y-4 text-center mb-12 animated-component")}
-          data-in-view={isIntersecting}
+    <section id="team" ref={ref} className="w-full bg-[var(--tf-bg)] py-[100px] sm:py-[140px]">
+      <div className="mx-auto max-w-[1280px] px-[5vw]">
+        <h2
+          className="mx-auto max-w-2xl text-center text-[clamp(32px,4vw,56px)] font-bold leading-tight tracking-tight text-[var(--tf-navy)] transition-all duration-700 ease-[var(--tf-ease)]"
+          style={{
+            opacity: isIntersecting ? 1 : 0,
+            transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
+          }}
         >
-          <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm">Our Team</div>
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-5xl">Meet Our Financial Experts</h2>
-          <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Our team of experienced and dedicated professionals is the backbone of ThinkFin. We are committed to providing you with the highest level of service and expertise.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-center">
+          The people behind your plan.
+        </h2>
+        <p
+          className="mx-auto mt-4 max-w-lg text-center text-[15px] leading-relaxed text-[var(--tf-text-secondary)] transition-all duration-700 ease-[var(--tf-ease)]"
+          style={{
+            opacity: isIntersecting ? 1 : 0,
+            transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
+          }}
+        >
+          Technology builds the platform. These are the certified professionals behind the guidance.
+        </p>
+
+        <div className="mx-auto mt-14 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
           {teamMembers.map((member, i) => (
-            <Card 
-              key={member.name} 
-              className={cn(
-                "overflow-hidden text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl animated-component"
-              )}
-              style={{ transitionDelay: `${i * 150}ms` }}
-              data-in-view={isIntersecting}
+            <div
+              key={member.name}
+              className="overflow-hidden rounded-[var(--tf-radius-lg)] border border-[var(--tf-border)] bg-white transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(var(--tf-navy-rgb),0.08)]"
+              style={{
+                transitionDelay: isIntersecting ? `${i * 120}ms` : "0ms",
+                opacity: isIntersecting ? 1 : 0,
+                transform: isIntersecting ? "translateY(0)" : "translateY(20px)",
+              }}
             >
               <Image
                 src={member.image}
                 alt={`Photo of ${member.name}`}
                 width={400}
                 height={400}
-                className="w-full h-auto aspect-square object-cover"
-                data-ai-hint={member.dataAiHint}
+                className="aspect-square w-full object-cover"
               />
-              <CardContent className="p-6">
-                <h3 className="font-headline text-xl font-semibold">{member.name}</h3>
-                <p className="text-primary font-medium">{member.role}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{member.bio}</p>
-              </CardContent>
-            </Card>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-[var(--tf-navy)]">{member.name}</h3>
+                <p className="text-sm font-semibold text-[var(--tf-blue)]">{member.role}</p>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--tf-text-secondary)]">{member.bio}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

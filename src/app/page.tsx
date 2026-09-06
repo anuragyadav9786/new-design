@@ -8,6 +8,7 @@ import HowItWorks from "@/components/redesign/how-it-works";
 import ProductShowcase from "@/components/redesign/product-showcase";
 import Ecosystem from "@/components/redesign/ecosystem";
 import WhyThinkFin from "@/components/redesign/why-thinkfin";
+import Team from "@/components/landing/team";
 import GoalGrid from "@/components/redesign/goal-grid";
 import RedesignTestimonials from "@/components/redesign/testimonials";
 import Insights from "@/components/redesign/insights";
@@ -53,6 +54,7 @@ export default function Home() {
         <ProductShowcase />
         <Ecosystem />
         <WhyThinkFin />
+        <Team />
         <GoalGrid />
         <RedesignTestimonials />
         <Insights />

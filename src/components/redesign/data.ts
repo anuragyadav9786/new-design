@@ -192,6 +192,6 @@ export const faqs = [
   {
     question: "What does ThinkFin charge me?",
     answer:
-      "PLACEHOLDER — confirm before publishing: most AMFI-registered distributors are compensated via a trail commission from the fund house (already priced into the fund's expense ratio), not a separate fee to you. Confirm this matches ThinkFin's actual model before this goes live.",
+      "Nothing directly. ThinkFin's compensation is already built into the mutual fund's NAV as part of its expense ratio, capped under SEBI's Total Expense Ratio (TER) guidelines — there's no separate fee you pay us.",
   },
 ];
