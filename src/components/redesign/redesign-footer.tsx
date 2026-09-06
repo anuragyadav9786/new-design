@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function RedesignFooter() {
   return (
@@ -7,9 +8,7 @@ export default function RedesignFooter() {
         <div className="flex flex-col items-center justify-between gap-6 border-b border-white/10 pb-10 sm:flex-row sm:items-start">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-[var(--tf-blue)] text-sm font-bold text-white">
-                T
-              </span>
+              <Image src="/icon/icon.png" alt="ThinkFin" width={32} height={32} className="h-8 w-8" />
               <span className="text-lg font-bold text-white">ThinkFin</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-white/50">ARN-309973 · AMFI Registered Mutual Fund Distributor</p>

@@ -1,3 +1,5 @@
+import { thinkfinLogoDataUri } from "./logo-data-uri";
+
 export function OgImageContent() {
   return (
     <div
@@ -13,22 +15,10 @@ export function OgImageContent() {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 40 }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 64,
-            height: 64,
-            borderRadius: 16,
-            background: "#1D5EFF",
-            color: "white",
-            fontSize: 32,
-            fontWeight: 700,
-          }}
-        >
-          T
-        </div>
+        {/* next/og's ImageResponse (Satori) renders this outside the DOM and only
+            understands plain <img>, not next/image — this is not a real page. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={thinkfinLogoDataUri} width={64} height={64} alt="" />
         <div style={{ display: "flex", color: "white", fontSize: 32, fontWeight: 700, letterSpacing: -0.5 }}>
           ThinkFin
         </div>

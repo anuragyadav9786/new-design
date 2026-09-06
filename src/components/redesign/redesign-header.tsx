@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { constants } from "@/components/common/constants";
 
@@ -19,9 +20,7 @@ export default function RedesignHeader() {
     <header className="sticky top-0 z-50 w-full border-b border-[var(--tf-border)] bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-[5vw]">
         <Link href="/" className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-[var(--tf-radius-xs)] bg-[var(--tf-navy)] text-sm font-bold text-white">
-            T
-          </span>
+          <Image src="/icon/icon.png" alt="ThinkFin" width={36} height={36} className="h-9 w-9" priority />
           <span className="text-lg font-bold tracking-tight text-[var(--tf-text)]">ThinkFin</span>
         </Link>
 
