@@ -29,7 +29,13 @@ export default function WhyThinkFin() {
   return (
     <section ref={ref} className="w-full bg-white py-[100px] sm:py-[140px]">
       <div className="mx-auto max-w-[1280px] px-[5vw]">
-        <h2 className="mx-auto max-w-3xl text-center text-[clamp(32px,4vw,56px)] font-bold leading-tight tracking-tight text-[var(--tf-navy)]">
+        <h2
+          className="mx-auto max-w-3xl text-center text-[clamp(32px,4vw,56px)] font-bold leading-tight tracking-tight text-[var(--tf-navy)] transition-all duration-700 ease-[var(--tf-ease)]"
+          style={{
+            opacity: isIntersecting ? 1 : 0,
+            transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
+          }}
+        >
           Technology makes investing easier.
           <br className="hidden sm:block" /> Human expertise makes it meaningful.
         </h2>

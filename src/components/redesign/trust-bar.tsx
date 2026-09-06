@@ -25,7 +25,13 @@ export default function TrustBar() {
 
   return (
     <section ref={ref} className="w-full border-y border-[var(--tf-border)] bg-white py-10">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-y-8 divide-[var(--tf-border)] px-[5vw] sm:grid-cols-4 sm:divide-x">
+      <div
+        className="mx-auto grid max-w-[1280px] grid-cols-2 gap-y-8 divide-[var(--tf-border)] px-[5vw] transition-all duration-700 ease-[var(--tf-ease)] sm:grid-cols-4 sm:divide-x"
+        style={{
+          opacity: isIntersecting ? 1 : 0,
+          transform: isIntersecting ? "translateY(0)" : "translateY(12px)",
+        }}
+      >
         {trustStats.map((stat) => (
           <StatTile key={stat.label} stat={stat} isActive={isIntersecting} />
         ))}

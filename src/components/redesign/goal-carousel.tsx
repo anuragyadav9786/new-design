@@ -170,15 +170,21 @@ export default function GoalCarousel() {
                 <p className="mt-2 text-sm leading-relaxed text-white/75">{visual.tagline}</p>
                 <p className="mt-4 text-sm font-semibold text-[var(--tf-blue-tint)]">{goal.target}</p>
 
-                {isActiveCard && (
-                  <Link
-                    href={`${constants.advisorAppLink}?goal=${goal.id}`}
-                    className="group/cta relative z-10 mt-5 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)]"
-                  >
-                    Start This Plan
-                    <span className="transition-transform duration-200 group-hover/cta:translate-x-0.5">→</span>
-                  </Link>
-                )}
+                <Link
+                  href={`${constants.advisorAppLink}?goal=${goal.id}`}
+                  aria-hidden={!isActiveCard}
+                  tabIndex={isActiveCard ? 0 : -1}
+                  className="group/cta relative z-10 mt-5 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)]"
+                  style={{
+                    opacity: isActiveCard ? 1 : 0,
+                    transform: isActiveCard ? "translateY(0)" : "translateY(8px)",
+                    transitionDelay: isActiveCard ? "150ms" : "0ms",
+                    pointerEvents: isActiveCard ? "auto" : "none",
+                  }}
+                >
+                  Start This Plan
+                  <span className="transition-transform duration-200 group-hover/cta:translate-x-0.5">→</span>
+                </Link>
               </div>
             </div>
           );

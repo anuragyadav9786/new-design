@@ -14,7 +14,13 @@ export default function GoalGrid() {
   return (
     <section ref={ref} className="w-full bg-[var(--tf-bg)] py-[100px] sm:py-[140px]">
       <div className="mx-auto max-w-[1280px] px-[5vw]">
-        <h2 className="mx-auto max-w-2xl text-center text-[clamp(32px,4vw,56px)] font-bold leading-tight tracking-tight text-[var(--tf-navy)]">
+        <h2
+          className="mx-auto max-w-2xl text-center text-[clamp(32px,4vw,56px)] font-bold leading-tight tracking-tight text-[var(--tf-navy)] transition-all duration-700 ease-[var(--tf-ease)]"
+          style={{
+            opacity: isIntersecting ? 1 : 0,
+            transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
+          }}
+        >
           What are you investing for?
         </h2>
 
@@ -26,14 +32,17 @@ export default function GoalGrid() {
               <Link
                 key={goal.id}
                 href={`${constants.advisorAppLink}?goal=${goal.id}`}
-                className="group relative aspect-[4/5] overflow-hidden rounded-[var(--tf-radius-md)] transition-all duration-700"
+                className="group relative aspect-[4/5] overflow-hidden rounded-[var(--tf-radius-md)] transition-[opacity,transform] duration-700 ease-[var(--tf-ease)]"
                 style={{
-                  background: visual.gradient,
                   transitionDelay: isIntersecting ? `${i * 70}ms` : "0ms",
                   opacity: isIntersecting ? 1 : 0,
                   transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
                 }}
               >
+                <div
+                  className="absolute inset-0 transition-transform duration-500 ease-[var(--tf-ease)] group-hover:scale-110"
+                  style={{ background: visual.gradient }}
+                />
                 <div className="absolute inset-0 bg-[var(--tf-navy)]/0 transition-colors duration-300 group-hover:bg-[var(--tf-navy)]/40" />
                 <Icon
                   className="absolute right-3 top-3 h-6 w-6 text-white/80 transition-transform duration-500 group-hover:scale-110"
