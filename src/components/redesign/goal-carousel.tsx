@@ -12,7 +12,7 @@ const AUTO_ADVANCE_MS = 4500;
 const DRAG_THRESHOLD = 60;
 const TAP_THRESHOLD = 8;
 const CARD_W = 300;
-const CARD_H = 460;
+const CARD_H = "clamp(320px, 48vh, 460px)";
 const ALLOCATION_COLORS = ["bg-white", "bg-[var(--tf-blue-tint)]", "bg-white/30"];
 
 type OffsetStyle = { x: number; scale: number; opacity: number; z: number };
@@ -108,7 +108,7 @@ export default function GoalCarousel() {
   return (
     <div className="w-full">
       <div
-        className="relative mx-auto h-[520px] w-full max-w-[720px] touch-pan-y select-none"
+        className="relative mx-auto h-[clamp(380px,54vh,520px)] w-full max-w-[720px] touch-pan-y select-none"
         style={{ perspective: "1400px" }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => {
@@ -167,18 +167,18 @@ export default function GoalCarousel() {
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--tf-navy)] via-transparent to-transparent" />
 
               <div className="relative flex h-full flex-col justify-end p-7 text-left">
-                <Icon className="mb-4 h-8 w-8 text-white/90" strokeWidth={1.5} />
+                <Icon className="mb-3 h-8 w-8 text-white/90" strokeWidth={1.5} />
                 <h3 className="text-2xl font-bold text-white">{goal.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/75 line-clamp-2">{visual.tagline}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/75 line-clamp-2">{visual.tagline}</p>
 
-                <div className="mt-4 flex items-center justify-between gap-2">
+                <div className="mt-3 flex items-center justify-between gap-2">
                   <p className="text-sm font-semibold text-[var(--tf-blue-tint)]">{goal.target}</p>
                   <p className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-white/60">
                     {goal.horizon}
                   </p>
                 </div>
 
-                <div className="mt-3 space-y-1.5">
+                <div className="mt-2.5 space-y-1">
                   <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-white/15">
                     {goal.allocation.map((slice, i) => (
                       <div
@@ -198,7 +198,7 @@ export default function GoalCarousel() {
                   </div>
                 </div>
 
-                <div className="mt-3 border-t border-white/15 pt-3">
+                <div className="mt-2.5 border-t border-white/15 pt-2.5 [@media(max-height:760px)]:hidden">
                   <span className="text-[10px] font-medium uppercase tracking-wide text-white/60">
                     Sample Top Pick
                   </span>
@@ -213,7 +213,7 @@ export default function GoalCarousel() {
                   href={`${constants.advisorAppLink}?goal=${goal.id}`}
                   aria-hidden={!isActiveCard}
                   tabIndex={isActiveCard ? 0 : -1}
-                  className="group/cta relative z-10 mt-5 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)]"
+                  className="group/cta relative z-10 mt-3 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)]"
                   style={{
                     opacity: isActiveCard ? 1 : 0,
                     transform: isActiveCard ? "translateY(0)" : "translateY(8px)",
@@ -230,7 +230,7 @@ export default function GoalCarousel() {
         })}
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-5">
+      <div className="mt-8 flex items-center justify-center gap-5 lg:mt-5">
         <button
           type="button"
           aria-label="Previous goal"
