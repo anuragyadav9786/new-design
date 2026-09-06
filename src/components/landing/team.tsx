@@ -9,19 +9,22 @@ import { cn } from "@/lib/utils";
 const teamMembers = [
   {
     name: "Yogesh Singh Tanwar",
-    role: "Chief Techinal Officier",
+    role: "Chief Technical Officer",
+    bio: "Builds and runs the platform behind ThinkFin, focused on making the investing experience simple and transparent.",
     image: "/our-team/yogesh-tanwar.jpg",
     dataAiHint: "man professional",
   },
   {
     name: "Hony Lt OP Singh Yadav",
-    role: "IRDAI Certified Insurance Advisior",
+    role: "IRDAI Certified Insurance Advisor",
+    bio: "Helps investors size the right protection cover for their family before recommending where a single rupee goes toward growth.",
     image: "/our-team/om-prakash.jpg",
     dataAiHint: "man professional",
   },
   {
     name: "Anurag Singh",
-    role: "AMFI Registered Mutual Fund Distributors",
+    role: "AMFI Registered Mutual Fund Distributor",
+    bio: "Works directly with investors to turn their goals into a structured, goal-based mutual fund portfolio.",
     image: "/our-team/anurag-singh.jpg",
     dataAiHint: "man turban",
   },
@@ -65,6 +68,7 @@ export default function Team() {
               <CardContent className="p-6">
                 <h3 className="font-headline text-xl font-semibold">{member.name}</h3>
                 <p className="text-primary font-medium">{member.role}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{member.bio}</p>
               </CardContent>
             </Card>
           ))}

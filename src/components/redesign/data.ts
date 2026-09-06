@@ -96,6 +96,7 @@ export const testimonials = [
     name: "Devender Singh",
     role: "Retired Army JCO",
     initials: "DS",
+    rating: 5,
     quote:
       "After retiring from the Army, I was worried about managing my pension benefits. ThinkFin provided a clear roadmap to invest my hard-earned money safely while ensuring long-term growth.",
   },
@@ -103,6 +104,7 @@ export const testimonials = [
     name: "Ankit Kumar",
     role: "Backend Developer",
     initials: "AK",
+    rating: 5,
     quote:
       "My portfolio was scattered and inefficient. The team at ThinkFin helped me reshuffle my investments into the right assets based on my goals.",
   },
@@ -110,6 +112,7 @@ export const testimonials = [
     name: "Saroj Prasad",
     role: "Software Engineer",
     initials: "SP",
+    rating: 5,
     quote:
       "I was overwhelmed by the number of investment options. ThinkFin's personalized recommendations helped me build a diversified portfolio that aligns with my risk tolerance.",
   },
@@ -135,6 +138,18 @@ export const insights = [
     title: "Your Down Payment Matters More Than Your EMI",
     description: "A bigger down payment can save more in interest than any rate negotiation ever will.",
     href: "/goals/house",
+  },
+  {
+    category: "Wealth Creation",
+    title: "A Few Percent Return Difference Is Everything",
+    description: "Chasing an extra point on a fixed deposit while ignoring asset allocation costs far more over 20 years than it looks like today.",
+    href: "/goals/wealth",
+  },
+  {
+    category: "Emergency Fund",
+    title: "The Real Risk Isn't the Emergency, It's Bad Timing",
+    description: "Job losses tend to spike exactly when markets fall — without a buffer, you're forced to sell at the worst possible moment.",
+    href: "/goals/emergency",
   },
 ];
 
@@ -168,5 +183,15 @@ export const faqs = [
     question: "How does ThinkFin understand my requirements?",
     answer:
       "Through the goal, horizon, and risk questions you answer on the advisor platform, combined with a conversation with our team to make sure the approach actually fits your life.",
+  },
+  {
+    question: "Is my money and information safe with ThinkFin?",
+    answer:
+      "Yes. ThinkFin is an AMFI-registered mutual fund distributor (ARN-309973) — your investments go directly into SEBI-regulated mutual funds held in your own name with the fund house, not with ThinkFin. We never take custody of your money, and your personal details are used only to build your investment profile.",
+  },
+  {
+    question: "What does ThinkFin charge me?",
+    answer:
+      "PLACEHOLDER — confirm before publishing: most AMFI-registered distributors are compensated via a trail commission from the fund house (already priced into the fund's expense ratio), not a separate fee to you. Confirm this matches ThinkFin's actual model before this goes live.",
   },
 ];

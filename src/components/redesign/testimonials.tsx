@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { testimonials } from "@/components/redesign/data";
 
@@ -63,9 +63,8 @@ export default function RedesignTestimonials() {
                 transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
               }}
             >
-              <p className="text-[15px] leading-relaxed text-[var(--tf-text)]">&ldquo;{t.quote}&rdquo;</p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--tf-navy)] text-sm font-semibold text-white">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--tf-navy)] text-sm font-semibold text-white">
                   {t.initials}
                 </div>
                 <div>
@@ -73,6 +72,18 @@ export default function RedesignTestimonials() {
                   <p className="text-xs text-[var(--tf-text-secondary)]">{t.role}</p>
                 </div>
               </div>
+              <div className="mt-3 flex gap-0.5" aria-label={`${t.rating} out of 5 stars`}>
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <Star
+                    key={starIndex}
+                    className="h-4 w-4"
+                    fill={starIndex < t.rating ? "var(--tf-blue)" : "none"}
+                    stroke="var(--tf-blue)"
+                    strokeWidth={1.5}
+                  />
+                ))}
+              </div>
+              <p className="mt-3 text-[15px] leading-relaxed text-[var(--tf-text)]">&ldquo;{t.quote}&rdquo;</p>
             </div>
           ))}
         </div>
