@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { constants } from "@/components/common/constants";
+import AppStoreBadges from "@/components/redesign/app-store-badges";
 
 export default function FinalCta() {
   const ref = useRef<HTMLDivElement>(null);
@@ -34,6 +35,11 @@ export default function FinalCta() {
           Start Your Investment Journey
           <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
         </a>
+
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <p className="text-xs font-medium uppercase tracking-wide text-white/40">Prefer the app?</p>
+          <AppStoreBadges className="justify-center" />
+        </div>
       </div>
     </section>
   );

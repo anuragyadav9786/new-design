@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import AppStoreBadges from "@/components/redesign/app-store-badges";
 
 export default function RedesignFooter() {
   return (
@@ -17,6 +18,11 @@ export default function RedesignFooter() {
             <p>Altf Coworking, A-100, Sector 58, Noida 201301</p>
             <p className="mt-1">+91 7503080522 · info@thinkfinfinance.com</p>
           </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-3 border-b border-white/10 py-8 sm:flex-row sm:justify-between">
+          <p className="text-sm text-white/50">Invest on the go with the ThinkFin app.</p>
+          <AppStoreBadges />
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 pt-8 text-xs text-white/40 sm:flex-row">
