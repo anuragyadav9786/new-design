@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { TrendingUp, ShieldCheck, Compass } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { ecosystemPillars } from "@/components/redesign/data";
+import { ecosystemPillars } from "@/features/marketing/content";
 
 const icons: Record<string, typeof TrendingUp> = {
   invest: TrendingUp,
