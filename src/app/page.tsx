@@ -1,19 +1,21 @@
-import RedesignStyles from "@/components/redesign/redesign-styles";
-import RedesignHeader from "@/components/redesign/redesign-header";
-import RedesignHero from "@/components/redesign/hero";
-import TrustBar from "@/components/redesign/trust-bar";
-import ProblemSolution from "@/components/redesign/problem-solution";
-import HowItWorks from "@/components/redesign/how-it-works";
-import ProductShowcase from "@/components/redesign/product-showcase";
-import Ecosystem from "@/components/redesign/ecosystem";
-import WhyThinkFin from "@/components/redesign/why-thinkfin";
+import {
+  Ecosystem,
+  Faq,
+  FinalCta,
+  GoalGrid,
+  Hero,
+  HowItWorks,
+  Insights,
+  ProblemSolution,
+  ProductShowcase,
+  Footer,
+  Header,
+  Testimonials,
+  TrustBar,
+  WhyThinkFin,
+  RedesignStyles,
+} from "@/components/marketing";
 import Team from "@/components/landing/team";
-import GoalGrid from "@/components/redesign/goal-grid";
-import RedesignTestimonials from "@/components/redesign/testimonials";
-import Insights from "@/components/redesign/insights";
-import RedesignFaq from "@/components/redesign/faq";
-import FinalCta from "@/components/redesign/final-cta";
-import RedesignFooter from "@/components/redesign/redesign-footer";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
@@ -26,10 +28,9 @@ export default function Home() {
   return (
     <div className="redesign-root bg-[var(--tf-bg)]">
       <RedesignStyles />
-
-      <RedesignHeader />
+      <Header />
       <main>
-        <RedesignHero />
+        <Hero />
         <TrustBar />
         <ProblemSolution />
         <HowItWorks />
@@ -38,12 +39,12 @@ export default function Home() {
         <WhyThinkFin />
         <Team />
         <GoalGrid />
-        <RedesignTestimonials />
+        <Testimonials />
         <Insights />
-        <RedesignFaq />
+        <Faq />
         <FinalCta />
       </main>
-      <RedesignFooter />
+      <Footer />
     </div>
   );
 }
