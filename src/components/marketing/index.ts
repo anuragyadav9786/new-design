@@ -1,6 +1,5 @@
-// Canonical public API for the current ThinkFin marketing experience.
-// Individual files remain in their existing location during migration; consumers
-// should import from this module instead of depending on the redesign folder name.
+// Canonical public API for the ThinkFin marketing experience.
+// Internal file locations can change without forcing route-level imports to change.
 export { default as AppStoreBadges } from "@/components/redesign/app-store-badges";
 export { default as Ecosystem } from "@/components/redesign/ecosystem";
 export { default as Faq } from "@/components/redesign/faq";
@@ -15,6 +14,7 @@ export { default as ProductShowcase } from "@/components/redesign/product-showca
 export { default as Footer } from "@/components/redesign/redesign-footer";
 export { default as Header } from "@/components/redesign/redesign-header";
 export { default as Testimonials } from "@/components/redesign/testimonials";
+export { default as Team } from "@/components/marketing/team";
 export { default as TrustBar } from "@/components/redesign/trust-bar";
 export { default as WhyThinkFin } from "@/components/redesign/why-thinkfin";
 export { default as RedesignStyles } from "@/components/redesign/redesign-styles";
