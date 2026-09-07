@@ -8,7 +8,7 @@ import { goalPortfolios } from "@/features/goals/portfolio";
 const stepIcons = [Target, Clock, SlidersHorizontal, Rocket];
 
 function MockFrame({ children }: { children: React.ReactNode }) {
-  return <div className="h-full w-full overflow-hidden rounded-[var(--tf-radius-md)] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"><div className="flex items-center gap-1.5 border-b border-[var(--tf-border)] px-4 py-3"><span className="h-2.5 w-2.5 rounded-full bg-[var(--tf-border)]" /><span className="h-2.5 w-2.5 rounded-full bg-[var(--tf-border)]" /><span className="h-2.5 w-2.5 rounded-full bg-[var(--tf-border)] /><span className="ml-3 flex h-5 flex-1 items-center rounded-md bg-[var(--tf-bg)] px-2.5 text-[9px] font-medium text-[var(--tf-text-secondary)]">advisor.thinkfinfinance.com</span></div><div className="p-6">{children}</div></div>;
+  return <div className="h-full w-full overflow-hidden rounded-[var(--tf-radius-md)] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.35)]"><div className="flex items-center gap-1.5 border-b border-[var(--tf-border)] px-4 py-3"><span className="h-2.5 w-2.5 rounded-full bg-[var(--tf-border)]" /><span className="h-2.5 w-2.5 rounded-full bg-[var(--tf-border)]" /><span className="h-2.5 w-2.5 rounded-full bg-[var(--tf-border)]" /><span className="ml-3 flex h-5 flex-1 items-center rounded-md bg-[var(--tf-bg)] px-2.5 text-[9px] font-medium text-[var(--tf-text-secondary)]">advisor.thinkfinfinance.com</span></div><div className="p-6">{children}</div></div>;
 }
 
 function MockScreen({ index }: { index: number }) {
