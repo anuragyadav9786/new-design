@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { faqs } from "@/components/redesign/data";
+import { faqs } from "@/features/marketing/content";
 
 export default function RedesignFaq() {
   const ref = useRef<HTMLDivElement>(null);
