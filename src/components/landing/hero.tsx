@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,15 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref, { threshold: 0.1 });
   const [activeGoal, setActiveGoal] = useState<GoalPortfolio>(goalPortfolios[0]);
+  const [showMutualFundsEyebrow, setShowMutualFundsEyebrow] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShowMutualFundsEyebrow(true);
+    }, 3000);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const handleActiveChange = useCallback((goal: GoalPortfolio) => {
     setActiveGoal(goal);
@@ -27,7 +36,24 @@ export default function Hero() {
           className={cn("mx-auto max-w-3xl text-center animated-component")}
           data-in-view={isIntersecting}
         >
-          <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs">Goal-Based Investing</div>
+          <div className="relative mx-auto h-5 overflow-hidden">
+            <div
+              className={cn(
+                "absolute inset-x-0 top-0 transition-all duration-300 motion-reduce:transition-none",
+                showMutualFundsEyebrow ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
+              )}
+            >
+              <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs">Invest with Purpose</span>
+            </div>
+            <div
+              className={cn(
+                "absolute inset-x-0 top-0 transition-all duration-300 motion-reduce:transition-none",
+                showMutualFundsEyebrow ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+              )}
+            >
+              <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs">Invest in Mutual Funds</span>
+            </div>
+          </div>
           <h1 className="mt-2 font-headline text-2xl font-bold tracking-tighter sm:text-3xl text-gray-900 dark:text-gray-50">
             Map Your Life Goals to the Right Portfolio
           </h1>
