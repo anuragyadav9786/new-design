@@ -10,12 +10,12 @@ import {
   ProductShowcase,
   Footer,
   Header,
+  Team,
   Testimonials,
   TrustBar,
   WhyThinkFin,
   RedesignStyles,
 } from "@/components/marketing";
-import Team from "@/components/landing/team";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
