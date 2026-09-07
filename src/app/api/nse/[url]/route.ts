@@ -1,48 +1,49 @@
 import { NextResponse } from "next/server";
+import {
+  isNseEndpoint,
+  nseEndpoints,
+} from "@/features/market-data/nse";
 
 export async function GET(
-  req: Request,
-  { params }: { params: Promise<{ url: string }> }
+  _request: Request,
+  { params }: { params: Promise<{ url: string }> },
 ) {
   const { url } = await params;
 
-  let targetUrl = "";
-
-  switch (url) {
-    case "allIndices":
-      targetUrl = "https://www.nseindia.com/api/allIndices";
-      break;
-
-    case "getMarqueData":
-      targetUrl =
-        "https://www.nseindia.com/api/NextApi/apiClient?functionName=getMarqueData";
-      break;
-
-    default:
-      return NextResponse.json(
-        { error: "Invalid NSE endpoint" },
-        { status: 400 }
-      );
+  if (!isNseEndpoint(url)) {
+    return NextResponse.json(
+      { error: "Invalid NSE endpoint" },
+      { status: 400 },
+    );
   }
 
   try {
-    const res = await fetch(targetUrl, {
+    const response = await fetch(nseEndpoints[url], {
       headers: {
         Accept: "application/json",
       },
+      next: {
+        revalidate: 60,
+      },
     });
 
-    if (!res.ok) {
+    if (!response.ok) {
       return NextResponse.json(
         { error: "Failed to fetch NSE data" },
-        { status: res.status }
+        { status: response.status },
       );
     }
 
-    const data = await res.json();
-    return NextResponse.json(data);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(await response.json(), {
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+      },
+    });
+  } catch (error) {
+    console.error("NSE proxy error:", error);
+    return NextResponse.json(
+      { error: "Unable to fetch NSE data" },
+      { status: 500 },
+    );
   }
 }

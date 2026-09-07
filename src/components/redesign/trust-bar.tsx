@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useCountUp } from "@/hooks/use-count-up";
-import { trustStats } from "@/components/redesign/data";
+import { trustStats } from "@/features/marketing/content";
 
 function StatTile({ stat, isActive }: { stat: (typeof trustStats)[number]; isActive: boolean }) {
   const count = useCountUp(stat.value, isActive && !stat.isText);
