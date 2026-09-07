@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { goalPortfolios } from "@/components/landing/goal-portfolios";
-import { goalVisuals } from "@/components/redesign/data";
+import { goalPortfolios } from "@/features/goals/portfolio";
+import { goalVisuals } from "@/features/marketing/content";
 import { constants } from "@/components/common/constants";
 import Sparkline from "@/components/landing/sparkline";
 
@@ -69,12 +69,6 @@ export default function GoalCarousel() {
     setParallax({ x: relX * 10, y: relY * 10 });
   };
 
-  // Tap-to-select and swipe-to-navigate are both resolved here, from the
-  // drag distance alone — not from a separate onClick per card. A card's
-  // on-screen position shifts the instant `active` changes, so a native
-  // "click" synthesized after a swipe can land on a different card than the
-  // one actually pressed and silently undo the swipe. Routing both
-  // gestures through one measurement avoids that race entirely.
   const handlePointerUp = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current || dragStartX.current === null) {
       setIsPaused(false);
@@ -155,71 +149,41 @@ export default function GoalCarousel() {
             >
               <div
                 className="pointer-events-none absolute -right-10 -top-10 opacity-[0.14] transition-transform duration-300"
-                style={
-                  isActiveCard
-                    ? { transform: `translate(${parallax.x}px, ${parallax.y}px)` }
-                    : undefined
-                }
+                style={isActiveCard ? { transform: `translate(${parallax.x}px, ${parallax.y}px)` } : undefined}
               >
                 <Icon className="h-56 w-56 text-white" strokeWidth={1} />
               </div>
-
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--tf-navy)] via-transparent to-transparent" />
-
               <div className="relative flex h-full flex-col justify-end p-7 text-left">
                 <Icon className="mb-3 h-8 w-8 text-white/90" strokeWidth={1.5} />
                 <h3 className="text-2xl font-bold text-white">{goal.name}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-white/75 line-clamp-2">{visual.tagline}</p>
-
                 <div className="mt-3 flex items-center justify-between gap-2">
                   <p className="text-sm font-semibold text-[var(--tf-blue-tint)]">{goal.target}</p>
-                  <p className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-white/60">
-                    {goal.horizon}
-                  </p>
+                  <p className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-white/60">{goal.horizon}</p>
                 </div>
-
                 <div className="mt-2.5 space-y-1">
                   <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-white/15">
                     {goal.allocation.map((slice, i) => (
-                      <div
-                        key={slice.label}
-                        className={ALLOCATION_COLORS[i % ALLOCATION_COLORS.length]}
-                        style={{ width: `${slice.pct}%` }}
-                        title={`${slice.label} ${slice.pct}%`}
-                      />
+                      <div key={slice.label} className={ALLOCATION_COLORS[i % ALLOCATION_COLORS.length]} style={{ width: `${slice.pct}%` }} title={`${slice.label} ${slice.pct}%`} />
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-x-2.5 gap-y-0.5 text-[11px] text-white/70">
-                    {goal.allocation.map((slice) => (
-                      <span key={slice.label}>
-                        {slice.label} {slice.pct}%
-                      </span>
-                    ))}
+                    {goal.allocation.map((slice) => <span key={slice.label}>{slice.label} {slice.pct}%</span>)}
                   </div>
                 </div>
-
                 <div className="mt-2.5 border-t border-white/15 pt-2.5 [@media(max-height:760px)]:hidden">
-                  <span className="text-[10px] font-medium uppercase tracking-wide text-white/60">
-                    Sample Top Pick
-                  </span>
+                  <span className="text-[10px] font-medium uppercase tracking-wide text-white/60">Sample Top Pick</span>
                   <p className="truncate text-[13px] font-semibold text-white">{goal.topFund}</p>
                   <Sparkline data={goal.growth} className="mt-1 h-6 w-full text-[var(--tf-blue-tint)]" />
-                  <p className="text-[9px] leading-tight text-white/50">
-                    Illustrative growth only, not a guarantee.
-                  </p>
+                  <p className="text-[9px] leading-tight text-white/50">Illustrative growth only, not a guarantee.</p>
                 </div>
-
                 <Link
                   href={`${constants.advisorAppLink}?goal=${goal.id}`}
                   aria-hidden={!isActiveCard}
                   tabIndex={isActiveCard ? 0 : -1}
                   className="group/cta relative z-10 mt-3 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)]"
-                  style={{
-                    opacity: isActiveCard ? 1 : 0,
-                    transform: isActiveCard ? "translateY(0)" : "translateY(8px)",
-                    transitionDelay: isActiveCard ? "150ms" : "0ms",
-                    pointerEvents: isActiveCard ? "auto" : "none",
-                  }}
+                  style={{ opacity: isActiveCard ? 1 : 0, transform: isActiveCard ? "translateY(0)" : "translateY(8px)", transitionDelay: isActiveCard ? "150ms" : "0ms", pointerEvents: isActiveCard ? "auto" : "none" }}
                 >
                   Start This Plan
                   <span className="transition-transform duration-200 group-hover/cta:translate-x-0.5">→</span>
@@ -229,37 +193,14 @@ export default function GoalCarousel() {
           );
         })}
       </div>
-
       <div className="mt-8 flex items-center justify-center gap-5 lg:mt-5">
-        <button
-          type="button"
-          aria-label="Previous goal"
-          onClick={prev}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--tf-border)] bg-white text-[var(--tf-text-secondary)] transition-all duration-200 hover:border-[var(--tf-blue)] hover:text-[var(--tf-blue)]"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </button>
+        <button type="button" aria-label="Previous goal" onClick={prev} className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--tf-border)] bg-white text-[var(--tf-text-secondary)] transition-all duration-200 hover:border-[var(--tf-blue)] hover:text-[var(--tf-blue)]"><ChevronLeft className="h-4 w-4" /></button>
         <div className="flex items-center gap-2">
           {goalPortfolios.map((goal, index) => (
-            <button
-              key={goal.id}
-              type="button"
-              aria-label={`Go to ${goal.name}`}
-              onClick={() => goTo(index)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                index === active ? "w-7 bg-[var(--tf-blue)]" : "w-1.5 bg-[var(--tf-border)]"
-              }`}
-            />
+            <button key={goal.id} type="button" aria-label={`Go to ${goal.name}`} onClick={() => goTo(index)} className={`h-1.5 rounded-full transition-all duration-300 ${index === active ? "w-7 bg-[var(--tf-blue)]" : "w-1.5 bg-[var(--tf-border)]"}`} />
           ))}
         </div>
-        <button
-          type="button"
-          aria-label="Next goal"
-          onClick={next}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--tf-border)] bg-white text-[var(--tf-text-secondary)] transition-all duration-200 hover:border-[var(--tf-blue)] hover:text-[var(--tf-blue)]"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </button>
+        <button type="button" aria-label="Next goal" onClick={next} className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--tf-border)] bg-white text-[var(--tf-text-secondary)] transition-all duration-200 hover:border-[var(--tf-blue)] hover:text-[var(--tf-blue)]"><ChevronRight className="h-4 w-4" /></button>
       </div>
     </div>
   );
