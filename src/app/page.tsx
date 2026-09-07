@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import RedesignStyles from "@/components/redesign/redesign-styles";
 import RedesignHeader from "@/components/redesign/redesign-header";
 import RedesignHero from "@/components/redesign/hero";
@@ -15,34 +14,17 @@ import Insights from "@/components/redesign/insights";
 import RedesignFaq from "@/components/redesign/faq";
 import FinalCta from "@/components/redesign/final-cta";
 import RedesignFooter from "@/components/redesign/redesign-footer";
+import { createPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ThinkFin — Invest With Purpose",
-  description: "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "ThinkFin — Invest With Purpose",
-    description: "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
-    url: "/",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "ThinkFin — Invest With Purpose",
-    description: "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
-  },
-};
+  description:
+    "Your goals. Your money. Your future. A modern, goal-based way to start investing with ThinkFin.",
+});
 
 export default function Home() {
   return (
     <div className="redesign-root bg-[var(--tf-bg)]">
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-      />
       <RedesignStyles />
 
       <RedesignHeader />
