@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
 import { goalPortfolios } from "@/components/landing/goal-portfolios";
 import { goalVisuals } from "@/components/redesign/data";
 import { constants } from "@/components/common/constants";
@@ -166,9 +166,15 @@ export default function GoalCarousel() {
 
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--tf-navy)] via-transparent to-transparent" />
 
-              <span className="absolute left-7 top-7 rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
-                {goal.investmentType}
-              </span>
+              <div className="absolute left-7 top-7 flex flex-wrap items-center gap-1.5">
+                <span className="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                  {goal.investmentType}
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                  <ShieldCheck className="h-3 w-3" strokeWidth={2} />
+                  SEBI Regulated
+                </span>
+              </div>
 
               <div className="relative flex h-full flex-col justify-end p-7 text-left">
                 <Icon className="mb-3 h-8 w-8 text-white/90" strokeWidth={1.5} />
