@@ -23,6 +23,7 @@ export interface GoalPortfolio {
   cta: string;
   topFund: string;
   growth: number[];
+  investmentType: "SIP" | "Lumpsum";
 }
 
 export const goalPortfolios: GoalPortfolio[] = [
@@ -41,6 +42,7 @@ export const goalPortfolios: GoalPortfolio[] = [
     cta: "Start Your Retirement Plan",
     topFund: "HDFC Retirement Savings Fund",
     growth: [100, 104, 109, 107, 114, 120, 126, 135],
+    investmentType: "SIP",
   },
   {
     id: "education",
@@ -57,6 +59,7 @@ export const goalPortfolios: GoalPortfolio[] = [
     cta: "Start Your Child's Education Plan",
     topFund: "ICICI Pru Child Care Fund (Gift Plan)",
     growth: [100, 106, 103, 112, 119, 115, 124, 132],
+    investmentType: "SIP",
   },
   {
     id: "wealth",
@@ -73,6 +76,7 @@ export const goalPortfolios: GoalPortfolio[] = [
     cta: "Start Your Wealth Creation Plan",
     topFund: "Parag Parikh Flexi Cap Fund",
     growth: [100, 112, 108, 125, 138, 130, 150, 165],
+    investmentType: "SIP",
   },
   {
     id: "house",
@@ -89,6 +93,7 @@ export const goalPortfolios: GoalPortfolio[] = [
     cta: "Start Your Home Buying Plan",
     topFund: "HDFC Short Term Debt Fund",
     growth: [100, 102, 104, 103, 106, 108, 110, 113],
+    investmentType: "SIP",
   },
   {
     id: "emergency",
@@ -104,5 +109,6 @@ export const goalPortfolios: GoalPortfolio[] = [
     cta: "Start Your Emergency Fund",
     topFund: "SBI Liquid Fund",
     growth: [100, 100.5, 101, 101.6, 102.1, 102.8, 103.4, 104],
+    investmentType: "Lumpsum",
   },
 ];

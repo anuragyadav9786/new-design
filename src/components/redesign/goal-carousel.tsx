@@ -166,6 +166,10 @@ export default function GoalCarousel() {
 
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--tf-navy)] via-transparent to-transparent" />
 
+              <span className="absolute left-7 top-7 rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                {goal.investmentType}
+              </span>
+
               <div className="relative flex h-full flex-col justify-end p-7 text-left">
                 <Icon className="mb-3 h-8 w-8 text-white/90" strokeWidth={1.5} />
                 <h3 className="text-2xl font-bold text-white">{goal.name}</h3>
