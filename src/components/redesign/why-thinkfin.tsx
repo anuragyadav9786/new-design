@@ -1,24 +1,25 @@
 "use client";
 
 import { useRef } from "react";
-import { Cpu, GraduationCap, Compass } from "lucide-react";
+import { Target, ShieldAlert, BarChart3, Users } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
-const pillars = [
+const reasons = [
+  { icon: Target, title: "Goal First", description: "We begin with what you’re trying to achieve." },
   {
-    icon: Cpu,
-    title: "Technology",
-    description: "Structured digital experience.",
+    icon: ShieldAlert,
+    title: "Risk Aware",
+    description: "Your investment approach should reflect your ability and willingness to take risk.",
   },
   {
-    icon: GraduationCap,
-    title: "Expertise",
-    description: "Professional financial guidance.",
+    icon: BarChart3,
+    title: "Data Guided",
+    description: "Investment decisions should be supported by relevant data and analysis.",
   },
   {
-    icon: Compass,
-    title: "Your Goals",
-    description: "A financial journey built around what matters to you.",
+    icon: Users,
+    title: "Human Support",
+    description: "Technology helps simplify the process. A human helps you navigate important decisions.",
   },
 ];
 
@@ -36,69 +37,30 @@ export default function WhyThinkFin() {
             transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
           }}
         >
-          Technology makes investing easier.
-          <br className="hidden sm:block" /> Human expertise makes it meaningful.
+          Why investors choose a goal-first approach
         </h2>
 
-        <div className="relative mx-auto mt-20 max-w-3xl">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6">
-            {pillars.map((pillar, i) => {
-              const Icon = pillar.icon;
-              return (
-                <div
-                  key={pillar.title}
-                  className="flex flex-col items-center text-center transition-all duration-700"
-                  style={{
-                    transitionDelay: `${i * 150}ms`,
-                    opacity: isIntersecting ? 1 : 0,
-                    transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
-                  }}
-                >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--tf-bg-soft)] text-[var(--tf-blue)]">
-                    <Icon className="h-7 w-7" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="mt-4 text-lg font-bold text-[var(--tf-navy)]">{pillar.title}</h3>
-                  <p className="mt-1.5 text-sm text-[var(--tf-text-secondary)]">{pillar.description}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <svg
-            viewBox="0 0 300 90"
-            className="mx-auto mt-2 hidden w-[70%] sm:block"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            {[50, 150, 250].map((x, i) => (
-              <path
-                key={x}
-                d={`M ${x} 0 C ${x} 45, 150 45, 150 88`}
-                fill="none"
-                stroke="var(--tf-blue)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                pathLength={1}
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {reasons.map((reason, i) => {
+            const Icon = reason.icon;
+            return (
+              <div
+                key={reason.title}
+                className="rounded-[var(--tf-radius-lg)] border border-[var(--tf-border)] bg-white p-7 transition-all duration-700 ease-[var(--tf-ease)]"
                 style={{
-                  strokeDasharray: 1,
-                  strokeDashoffset: isIntersecting ? 0 : 1,
-                  transition: `stroke-dashoffset 900ms var(--tf-ease) ${400 + i * 150}ms`,
-                  opacity: 0.35,
+                  transitionDelay: isIntersecting ? `${i * 100}ms` : "0ms",
+                  opacity: isIntersecting ? 1 : 0,
+                  transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
                 }}
-              />
-            ))}
-          </svg>
-
-          <div
-            className="relative z-10 mx-auto -mt-1 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--tf-navy)] text-sm font-bold text-white shadow-[0_10px_30px_rgba(var(--tf-navy-rgb),0.3)] transition-all duration-700"
-            style={{
-              transitionDelay: "900ms",
-              opacity: isIntersecting ? 1 : 0,
-              transform: isIntersecting ? "scale(1)" : "scale(0.7)",
-            }}
-          >
-            TF
-          </div>
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-[var(--tf-radius-xs)] bg-[var(--tf-bg-soft)] text-[var(--tf-blue)]">
+                  <Icon className="h-[22px] w-[22px]" strokeWidth={1.75} />
+                </div>
+                <h3 className="mt-4 text-base font-bold text-[var(--tf-navy)]">{reason.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-[var(--tf-text-secondary)]">{reason.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

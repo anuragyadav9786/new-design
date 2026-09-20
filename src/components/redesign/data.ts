@@ -155,9 +155,23 @@ export const insights = [
 
 export const faqs = [
   {
+    question: "Is the investment assessment free?",
+    answer: "Yes. The assessment on this page is completely free and there's no obligation to invest afterwards.",
+  },
+  {
+    question: "Do I have to invest after the assessment?",
+    answer:
+      "No. The assessment is meant to help you understand what your goal may require. Whether and when you invest is entirely your decision.",
+  },
+  {
+    question: "Do you guarantee returns?",
+    answer:
+      "No. Market-linked investments carry risk, and returns are not guaranteed. Any figures shown in the assessment are illustrative estimates, not promises.",
+  },
+  {
     question: "How do I get started?",
     answer:
-      "Choose a goal on this page, or click \"Start Investing.\" You'll be taken to our advisor platform, where a short set of questions builds your investment profile.",
+      "Choose a goal on this page, or click \"Get My Investment Plan.\" You'll be taken to our advisor platform, where a short set of questions builds your investment profile.",
   },
   {
     question: "Is there a minimum investment amount?",

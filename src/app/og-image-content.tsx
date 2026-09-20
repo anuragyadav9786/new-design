@@ -47,8 +47,8 @@ export function OgImageContent() {
           letterSpacing: -2,
         }}
       >
-        <span>Your Goals. Your Money.</span>
-        <span>Your Future.</span>
+        <span>Invest for a goal.</span>
+        <span>Not just for a return.</span>
       </div>
     </div>
   );

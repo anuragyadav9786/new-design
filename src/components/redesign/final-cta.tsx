@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { constants } from "@/components/common/constants";
+import { trackEvent } from "@/lib/analytics";
 import AppStoreBadges from "@/components/redesign/app-store-badges";
 
 export default function FinalCta() {
@@ -23,18 +23,21 @@ export default function FinalCta() {
         }}
       >
         <h2 className="mx-auto max-w-2xl text-[clamp(36px,4.5vw,64px)] font-bold leading-tight tracking-tight text-white">
-          Your goals deserve a plan.
+          Your goal deserves a plan.
         </h2>
         <p className="mx-auto mt-5 max-w-md text-[17px] text-white/70">
-          Take the first step by telling us what you&apos;re working towards.
+          Start with three minutes today. Understand what your goal may require &mdash; and what an investment
+          approach could look like.
         </p>
         <a
-          href={constants.advisorAppLink}
+          href="#assessment"
+          onClick={() => trackEvent("hero_cta_clicked", { cta: "get_my_investment_plan", source: "final_cta" })}
           className="group mt-10 inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-8 py-4 text-[16px] font-semibold text-white shadow-[0_20px_50px_rgba(var(--tf-blue-rgb),0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-secondary)]"
         >
-          Start Your Investment Journey
+          Get My Investment Plan
           <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
         </a>
+        <p className="mt-3 text-sm text-white/50">Free assessment &bull; About 3 minutes &bull; No obligation</p>
 
         <div className="mt-8 flex flex-col items-center gap-3">
           <p className="text-xs font-medium uppercase tracking-wide text-white/40">Prefer the app?</p>

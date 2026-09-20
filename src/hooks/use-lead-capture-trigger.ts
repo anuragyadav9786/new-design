@@ -47,8 +47,14 @@ export function useLeadCaptureTrigger() {
       // edge — a loose "within one viewport" check can overlap with the
       // depth threshold below on tall viewports / shorter pages, permanently
       // suppressing the popup before it ever gets a chance to fire.
-      const scheduleSection = document.getElementById("schedule");
-      if (scheduleSection && scheduleSection.getBoundingClientRect().top < window.innerHeight * 0.3) {
+      //
+      // Checks #assessment, not #schedule: the old #schedule section was
+      // removed when the redesign replaced the homepage, which silently
+      // disabled this escape hatch — letting this exit-intent popup fire
+      // mid-scroll over the new goal-based assessment instead of standing
+      // down once the visitor already has a low-pressure path in view.
+      const assessmentSection = document.getElementById("assessment");
+      if (assessmentSection && assessmentSection.getBoundingClientRect().top < window.innerHeight * 0.3) {
         hasReachedScheduleRef.current = true;
         return;
       }
