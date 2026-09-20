@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
 import { goalPortfolios } from "@/components/landing/goal-portfolios";
 import { goalVisuals } from "@/components/redesign/data";
 import { constants } from "@/components/common/constants";
-import Sparkline from "@/components/landing/sparkline";
+import { trackEvent } from "@/lib/analytics";
 
 const AUTO_ADVANCE_MS = 4500;
 const DRAG_THRESHOLD = 60;
@@ -42,7 +42,12 @@ export default function GoalCarousel() {
   const isDraggingRef = useRef(false);
 
   const goTo = useCallback(
-    (index: number) => setActive(((index % length) + length) % length),
+    (index: number, source: "card" | "dot" = "dot") => {
+      setActive(((index % length) + length) % length);
+      if (source === "card") {
+        trackEvent("goal_card_clicked", { goal_id: goalPortfolios[index]?.id });
+      }
+    },
     [length]
   );
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
@@ -84,7 +89,7 @@ export default function GoalCarousel() {
 
     if (Math.abs(deltaX) < TAP_THRESHOLD) {
       if (pressedIndexRef.current !== null && pressedIndexRef.current !== active) {
-        goTo(pressedIndexRef.current);
+        goTo(pressedIndexRef.current, "card");
       }
     } else if (deltaX > DRAG_THRESHOLD) {
       prev();
@@ -101,7 +106,7 @@ export default function GoalCarousel() {
   const handleCardKeyDown = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      goTo(index);
+      goTo(index, "card");
     }
   };
 
@@ -208,19 +213,9 @@ export default function GoalCarousel() {
                   </div>
                 </div>
 
-                <div className="mt-2.5 border-t border-white/15 pt-2.5 [@media(max-height:760px)]:hidden">
-                  <span className="text-[10px] font-medium uppercase tracking-wide text-white/60">
-                    Sample Top Pick
-                  </span>
-                  <p className="truncate text-[13px] font-semibold text-white">{goal.topFund}</p>
-                  <Sparkline data={goal.growth} className="mt-1 h-6 w-full text-[var(--tf-blue-tint)]" />
-                  <p className="text-[9px] leading-tight text-white/50">
-                    Illustrative growth only, not a guarantee.
-                  </p>
-                </div>
-
                 <Link
                   href={`${constants.advisorAppLink}?goal=${goal.id}`}
+                  onClick={() => trackEvent("advisor_contact_clicked", { source: "hero_carousel", goal_id: goal.id })}
                   aria-hidden={!isActiveCard}
                   tabIndex={isActiveCard ? 0 : -1}
                   className="group/cta relative z-10 mt-3 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)]"

@@ -1,8 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { constants } from "@/components/common/constants";
+import { trackEvent } from "@/lib/analytics";
 
 const teamMembers = [
   {
@@ -22,6 +24,18 @@ const teamMembers = [
 export default function Team() {
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref, { threshold: 0.15 });
+  const hasFiredViewed = useRef(false);
+
+  useEffect(() => {
+    if (isIntersecting && !hasFiredViewed.current) {
+      hasFiredViewed.current = true;
+      trackEvent("about_anurag_viewed");
+    }
+  }, [isIntersecting]);
+
+  const handleTalkToThinkFin = useCallback(() => {
+    trackEvent("advisor_contact_clicked", { source: "team_section" });
+  }, []);
 
   return (
     <section id="team" ref={ref} className="w-full bg-[var(--tf-bg)] py-[100px] sm:py-[140px]">
@@ -70,6 +84,23 @@ export default function Team() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 flex flex-col items-center gap-6">
+          <a
+            href={constants.advisorAppLink}
+            onClick={handleTalkToThinkFin}
+            className="group inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_10px_40px_rgba(var(--tf-blue-rgb),0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-hover)]"
+          >
+            Talk to ThinkFin
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </a>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-[var(--tf-text-secondary)]">
+            <span className="rounded-full border border-[var(--tf-border)] bg-white px-3.5 py-1.5">AMFI Registered</span>
+            <span className="rounded-full border border-[var(--tf-border)] bg-white px-3.5 py-1.5">Goal-Based Approach</span>
+            <span className="rounded-full border border-[var(--tf-border)] bg-white px-3.5 py-1.5">Transparent Process</span>
+          </div>
         </div>
       </div>
     </section>

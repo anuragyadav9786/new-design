@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { processSteps } from "@/components/redesign/data";
-import { constants } from "@/components/common/constants";
+import { trackEvent } from "@/lib/analytics";
 
 export default function HowItWorks() {
   const ref = useRef<HTMLDivElement>(null);
@@ -57,10 +57,11 @@ export default function HowItWorks() {
 
         <div className="mt-16 flex justify-center">
           <a
-            href={constants.advisorAppLink}
+            href="#assessment"
+            onClick={() => trackEvent("how_it_works_clicked", { source: "how_it_works_cta" })}
             className="group inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-7 py-4 text-[15px] font-semibold text-white shadow-[0_10px_40px_rgba(var(--tf-blue-rgb),0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-hover)]"
           >
-            Start Your Journey
+            Build My Investment Plan
             <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
           </a>
         </div>

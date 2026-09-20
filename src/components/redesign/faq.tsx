@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { faqs } from "@/components/redesign/data";
+import { trackEvent } from "@/lib/analytics";
 
 export default function RedesignFaq() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +23,17 @@ export default function RedesignFaq() {
           Questions, answered.
         </h2>
 
-        <Accordion type="single" collapsible className="mt-14 w-full">
+        <Accordion
+          type="single"
+          collapsible
+          className="mt-14 w-full"
+          onValueChange={(value) => {
+            if (!value) return;
+            const index = Number(value.replace("item-", ""));
+            const faq = faqs[index];
+            if (faq) trackEvent("faq_opened", { question: faq.question });
+          }}
+        >
           {faqs.map((faq, i) => (
             <div
               key={faq.question}

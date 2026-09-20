@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { constants } from "@/components/common/constants";
 import GoalCarousel from "@/components/redesign/goal-carousel";
+import { trackEvent } from "@/lib/analytics";
 
-const eyebrowPhrases = ["INVEST WITH PURPOSE", "INVEST IN MUTUAL FUNDS"];
+const eyebrowPhrases = ["INVEST WITH PURPOSE", "INVEST FOR YOUR GOALS"];
 const typingSpeed = 85;
 const deletingSpeed = 45;
 const pauseAfterTyping = 2200;
@@ -49,7 +49,12 @@ export default function RedesignHero() {
   }, [displayedText, isDeleting, phraseIndex]);
 
   const scrollToProcess = () => {
+    trackEvent("how_it_works_clicked", { source: "hero" });
     document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handlePrimaryCta = () => {
+    trackEvent("hero_cta_clicked", { cta: "get_my_investment_plan", source: "hero" });
   };
 
   return (
@@ -65,26 +70,25 @@ export default function RedesignHero() {
             <span className="sr-only">{eyebrowPhrases[phraseIndex]}</span>
           </span>
 
-          <h1 className="mt-6 font-sans text-[clamp(48px,6vw,88px)] font-bold leading-[1.05] tracking-tight text-[var(--tf-navy)] lg:mt-4 lg:text-[clamp(36px,3vw+2.2vh,80px)]">
-            Your Goals.
+          <h1 className="mt-6 font-sans text-[clamp(40px,6vw,72px)] font-bold leading-[1.08] tracking-tight text-[var(--tf-navy)] lg:mt-4 lg:text-[clamp(32px,3vw+2vh,68px)]">
+            Invest for a goal.
             <br />
-            Your Money.
-            <br />
-            Your Future.
+            Not just for a return.
           </h1>
 
           <p className="mt-6 max-w-md text-[17px] leading-relaxed text-[var(--tf-text-secondary)] lg:mt-4">
-            Every investment begins with a reason. Whether you&apos;re building wealth, buying your
-            dream home, securing your family&apos;s future, or planning your retirement — start with
-            a goal.
+            Whether it&apos;s your first ₹1 Crore, your child&apos;s education, your retirement or your next big
+            milestone — tell us your goal, timeline and risk comfort, and get a clear investment approach built
+            around it.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4 lg:mt-6">
             <a
-              href={constants.advisorAppLink}
+              href="#assessment"
+              onClick={handlePrimaryCta}
               className="group inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-7 py-4 text-[15px] font-semibold text-white shadow-[0_10px_40px_rgba(var(--tf-blue-rgb),0.3)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-hover)]"
             >
-              Explore Your Investment Plan
+              Get My Investment Plan
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
             </a>
 
@@ -93,10 +97,14 @@ export default function RedesignHero() {
               onClick={scrollToProcess}
               className="inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] px-5 py-4 text-[15px] font-semibold text-[var(--tf-navy)] transition-colors duration-200 hover:text-[var(--tf-blue)]"
             >
-              How ThinkFin Works
+              See How It Works
               <span>↓</span>
             </button>
           </div>
+
+          <p className="mt-4 text-sm text-[var(--tf-text-secondary)]">
+            Free assessment &bull; Takes about 3 minutes &bull; No obligation
+          </p>
         </div>
 
         <div className="animate-fade-up [animation-delay:150ms]">

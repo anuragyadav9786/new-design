@@ -4,12 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { constants } from "@/components/common/constants";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { href: "#how-it-works", label: "How It Works" },
-  { href: "#ecosystem", label: "Services" },
-  { href: "#testimonials", label: "Stories" },
+  { href: "#assessment", label: "Goals" },
+  { href: "#team", label: "About ThinkFin" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -38,10 +38,11 @@ export default function RedesignHeader() {
 
         <div className="flex items-center gap-2">
           <a
-            href={constants.advisorAppLink}
+            href="#assessment"
+            onClick={() => trackEvent("hero_cta_clicked", { cta: "get_my_investment_plan", source: "navbar" })}
             className="group inline-flex items-center gap-1.5 rounded-[var(--tf-radius-sm)] bg-[var(--tf-blue)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_10px_40px_rgba(var(--tf-navy-rgb),0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-hover)] sm:px-5"
           >
-            Start Investing
+            Get My Investment Plan
             <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
           </a>
 

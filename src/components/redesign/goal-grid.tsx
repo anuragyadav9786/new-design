@@ -6,6 +6,7 @@ import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { goalPortfolios } from "@/components/landing/goal-portfolios";
 import { goalVisuals } from "@/components/redesign/data";
 import { constants } from "@/components/common/constants";
+import { trackEvent } from "@/lib/analytics";
 
 const ALLOCATION_COLORS = ["bg-white", "bg-[var(--tf-blue-tint)]", "bg-white/30"];
 
@@ -23,7 +24,7 @@ export default function GoalGrid() {
             transform: isIntersecting ? "translateY(0)" : "translateY(16px)",
           }}
         >
-          What are you investing for?
+          Explore by goal
         </h2>
 
         <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -34,6 +35,7 @@ export default function GoalGrid() {
               <Link
                 key={goal.id}
                 href={`${constants.advisorAppLink}?goal=${goal.id}`}
+                onClick={() => trackEvent("advisor_contact_clicked", { source: "goal_grid", goal_id: goal.id })}
                 className="group relative aspect-[4/5] overflow-hidden rounded-[var(--tf-radius-md)] transition-[opacity,transform] duration-700 ease-[var(--tf-ease)]"
                 style={{
                   transitionDelay: isIntersecting ? `${i * 70}ms` : "0ms",
