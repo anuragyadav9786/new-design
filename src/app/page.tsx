@@ -3,20 +3,21 @@ import RedesignStyles from "@/components/redesign/redesign-styles";
 import RedesignHeader from "@/components/redesign/redesign-header";
 import RedesignHero from "@/components/redesign/hero";
 import TrustBar from "@/components/redesign/trust-bar";
-import ProblemSolution from "@/components/redesign/problem-solution";
+import RegulatoryTrustStrip from "@/components/redesign/regulatory-trust-strip";
+import GoalSegmentSwitcher from "@/components/redesign/goal-segment-switcher";
 import HowItWorks from "@/components/redesign/how-it-works";
 import AssessmentSection from "@/components/redesign/assessment-section";
 import Personalization from "@/components/redesign/personalization";
 import Team from "@/components/landing/team";
-import WhyThinkFin from "@/components/redesign/why-thinkfin";
+import BentoValueProps from "@/components/redesign/bento-value-props";
 import ProductShowcase from "@/components/redesign/product-showcase";
 import Ecosystem from "@/components/redesign/ecosystem";
-import GoalGrid from "@/components/redesign/goal-grid";
 import RedesignTestimonials from "@/components/redesign/testimonials";
 import Insights from "@/components/redesign/insights";
 import RedesignFaq from "@/components/redesign/faq";
 import FinalCta from "@/components/redesign/final-cta";
 import RedesignFooter from "@/components/redesign/redesign-footer";
+import StickyMobileCta from "@/components/redesign/sticky-mobile-cta";
 
 export const metadata: Metadata = {
   title: "ThinkFin | Goal-Based Investment Planning",
@@ -54,21 +55,22 @@ export default function Home() {
       <main>
         <RedesignHero />
         <TrustBar />
-        <ProblemSolution />
+        <RegulatoryTrustStrip />
+        <GoalSegmentSwitcher />
         <HowItWorks />
         <AssessmentSection />
         <Personalization />
         <Team />
-        <WhyThinkFin />
+        <BentoValueProps />
         <ProductShowcase />
         <Ecosystem />
-        <GoalGrid />
         <RedesignTestimonials />
         <Insights />
         <RedesignFaq />
         <FinalCta />
       </main>
       <RedesignFooter />
+      <StickyMobileCta />
     </div>
   );
 }

@@ -54,7 +54,7 @@ export default function RedesignHero() {
   };
 
   const handlePrimaryCta = () => {
-    trackEvent("hero_cta_clicked", { cta: "get_my_investment_plan", source: "hero" });
+    trackEvent("hero_cta_clicked", { cta: "build_my_investment_plan", source: "hero" });
   };
 
   return (
@@ -88,7 +88,7 @@ export default function RedesignHero() {
               onClick={handlePrimaryCta}
               className="group inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-7 py-4 text-[15px] font-semibold text-white shadow-[0_10px_40px_rgba(var(--tf-blue-rgb),0.3)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-hover)]"
             >
-              Get My Investment Plan
+              Build My Investment Plan
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
             </a>
 
@@ -97,7 +97,7 @@ export default function RedesignHero() {
               onClick={scrollToProcess}
               className="inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] px-5 py-4 text-[15px] font-semibold text-[var(--tf-navy)] transition-colors duration-200 hover:text-[var(--tf-blue)]"
             >
-              See How It Works
+              Explore Methodology
               <span>↓</span>
             </button>
           </div>
