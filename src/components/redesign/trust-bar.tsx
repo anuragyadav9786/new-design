@@ -24,7 +24,7 @@ export default function TrustBar() {
   const isIntersecting = useIntersectionObserver(ref, { threshold: 0.4 });
 
   return (
-    <section id="trust-bar" ref={ref} className="w-full border-y border-[var(--tf-border)] bg-white py-10">
+    <section ref={ref} className="w-full border-y border-[var(--tf-border)] bg-white py-10">
       <div
         className="mx-auto grid max-w-[1280px] grid-cols-2 gap-y-8 divide-[var(--tf-border)] px-[5vw] transition-all duration-700 ease-[var(--tf-ease)] sm:grid-cols-4 sm:divide-x"
         style={{

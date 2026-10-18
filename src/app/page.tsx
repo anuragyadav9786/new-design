@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import RedesignStyles from "@/components/redesign/redesign-styles";
 import RedesignHeader from "@/components/redesign/redesign-header";
 import RedesignHero from "@/components/redesign/hero";
@@ -19,16 +18,6 @@ import RedesignFaq from "@/components/redesign/faq";
 import FinalCta from "@/components/redesign/final-cta";
 import RedesignFooter from "@/components/redesign/redesign-footer";
 import StickyMobileCta from "@/components/redesign/sticky-mobile-cta";
-
-// Self-hosted via next/font instead of a render-blocking Google Fonts
-// <link> — the hero H1 is this page's LCP element, so this directly
-// improves LCP/CLS rather than just being a nicety.
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "ThinkFin | Goal-Based Investment Planning",
@@ -53,7 +42,13 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={`redesign-root bg-[var(--tf-bg)] ${inter.variable}`}>
+    <div className="redesign-root bg-[var(--tf-bg)]">
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
       <RedesignStyles />
 
       <RedesignHeader />
