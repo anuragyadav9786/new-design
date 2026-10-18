@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, ShieldCheck } from "lucide-react";
 import { goalPortfolios, type GoalPortfolio } from "@/components/landing/goal-portfolios";
 import { goalVisuals } from "@/components/redesign/data";
+import { constants } from "@/components/common/constants";
 import { trackEvent } from "@/lib/analytics";
 
 const AUTO_ADVANCE_MS = 4500;
@@ -11,10 +13,17 @@ const DRAG_THRESHOLD = 60;
 const TAP_THRESHOLD = 8;
 const CARD_W = 300;
 const CARD_H = "clamp(320px, 48vh, 460px)";
+const ALLOCATION_COLORS = ["bg-white", "bg-[var(--tf-blue-tint)]", "bg-white/30"];
 
-// Only the active card renders (see the render filter below), so a single
-// centered offset is the only one ever used.
-const ACTIVE_OFFSET = { x: 0, scale: 1, opacity: 1, z: 30 };
+type OffsetStyle = { x: number; scale: number; opacity: number; z: number };
+
+const OFFSET_STYLES: Record<number, OffsetStyle> = {
+  0: { x: 0, scale: 1, opacity: 1, z: 30 },
+  1: { x: 210, scale: 0.86, opacity: 0.55, z: 20 },
+  [-1]: { x: -210, scale: 0.86, opacity: 0.55, z: 20 },
+  2: { x: 380, scale: 0.72, opacity: 0.22, z: 10 },
+  [-2]: { x: -380, scale: 0.72, opacity: 0.22, z: 10 },
+};
 
 function signedDistance(index: number, active: number, length: number) {
   let diff = index - active;
@@ -31,6 +40,7 @@ export default function GoalCarousel({
   const length = goalPortfolios.length;
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
   const dragStartX = useRef<number | null>(null);
   const pressedIndexRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
@@ -63,6 +73,13 @@ export default function GoalCarousel({
     const cardEl = (e.target as HTMLElement).closest<HTMLElement>("[data-goal-index]");
     pressedIndexRef.current = cardEl ? Number(cardEl.dataset.goalIndex) : null;
     setIsPaused(true);
+  };
+
+  const handlePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    setParallax({ x: relX * 10, y: relY * 10 });
   };
 
   // Tap-to-select and swipe-to-navigate are both resolved here, from the
@@ -106,10 +123,15 @@ export default function GoalCarousel({
   return (
     <div className="w-full">
       <div
-        className="relative mx-auto h-[clamp(320px,48vh,460px)] w-full max-w-[720px] touch-pan-y select-none"
+        className="relative mx-auto h-[clamp(380px,54vh,520px)] w-full max-w-[720px] touch-pan-y select-none"
+        style={{ perspective: "1400px" }}
         onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onMouseLeave={() => {
+          setIsPaused(false);
+          setParallax({ x: 0, y: 0 });
+        }}
         onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={() => {
           isDraggingRef.current = false;
@@ -119,8 +141,9 @@ export default function GoalCarousel({
       >
         {goalPortfolios.map((goal, index) => {
           const distance = signedDistance(index, active, length);
-          if (distance !== 0) return null;
-          const style = ACTIVE_OFFSET;
+          if (Math.abs(distance) > 2) return null;
+          const style = OFFSET_STYLES[distance];
+          const isActiveCard = distance === 0;
           const Icon = goal.icon;
           const visual = goalVisuals[goal.id];
 
@@ -131,9 +154,11 @@ export default function GoalCarousel({
               tabIndex={0}
               data-goal-index={index}
               aria-label={`View ${goal.name} goal`}
-              aria-current={true}
+              aria-current={isActiveCard}
               onKeyDown={(e) => handleCardKeyDown(e, index)}
-              className={`absolute left-1/2 top-1/2 cursor-default overflow-hidden rounded-[var(--tf-radius-lg)] shadow-[0_10px_40px_rgba(var(--tf-navy-rgb),0.1)] transition-all duration-[600ms] ease-[var(--tf-ease)] ${FOCUS_RING}`}
+              className={`absolute left-1/2 top-1/2 overflow-hidden rounded-[var(--tf-radius-lg)] shadow-[0_20px_60px_rgba(var(--tf-navy-rgb),0.25)] transition-all duration-[600ms] ease-[var(--tf-ease)] ${FOCUS_RING} ${
+                isActiveCard ? "cursor-default" : "cursor-pointer"
+              } ${!isActiveCard ? "hidden sm:block" : ""}`}
               style={{
                 width: CARD_W,
                 height: CARD_H,
@@ -143,9 +168,23 @@ export default function GoalCarousel({
                 background: visual.gradient,
               }}
             >
+              <div
+                className="pointer-events-none absolute -right-10 -top-10 opacity-[0.14] transition-transform duration-300"
+                style={
+                  isActiveCard
+                    ? { transform: `translate(${parallax.x}px, ${parallax.y}px)` }
+                    : undefined
+                }
+              >
+                <Icon className="h-56 w-56 text-white" strokeWidth={1} />
+              </div>
+
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--tf-navy)] via-transparent to-transparent" />
 
-              <div className="absolute left-7 top-7">
+              <div className="absolute left-7 top-7 flex flex-wrap items-center gap-1.5">
+                <span className="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                  {goal.investmentType}
+                </span>
                 <span className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
                   <ShieldCheck className="h-3 w-3" strokeWidth={2} />
                   SEBI Regulated
@@ -163,6 +202,43 @@ export default function GoalCarousel({
                     {goal.horizon}
                   </p>
                 </div>
+
+                <div className="mt-2.5 space-y-1">
+                  <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-white/15">
+                    {goal.allocation.map((slice, i) => (
+                      <div
+                        key={slice.label}
+                        className={ALLOCATION_COLORS[i % ALLOCATION_COLORS.length]}
+                        style={{ width: `${slice.pct}%` }}
+                        title={`${slice.label} ${slice.pct}%`}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-x-2.5 gap-y-0.5 text-[11px] text-white/70">
+                    {goal.allocation.map((slice) => (
+                      <span key={slice.label}>
+                        {slice.label} {slice.pct}%
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <Link
+                  href={`${constants.advisorAppLink}?goal=${goal.id}`}
+                  onClick={() => trackEvent("advisor_contact_clicked", { source: "hero_carousel", goal_id: goal.id })}
+                  aria-hidden={!isActiveCard}
+                  tabIndex={isActiveCard ? 0 : -1}
+                  className={`group/cta relative z-10 mt-3 inline-flex w-fit items-center gap-1.5 rounded-[var(--tf-radius-xs)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--tf-navy)] transition-all duration-300 ease-[var(--tf-ease)] hover:-translate-y-0.5 hover:bg-[var(--tf-bg-soft)] ${FOCUS_RING}`}
+                  style={{
+                    opacity: isActiveCard ? 1 : 0,
+                    transform: isActiveCard ? "translateY(0)" : "translateY(8px)",
+                    transitionDelay: isActiveCard ? "150ms" : "0ms",
+                    pointerEvents: isActiveCard ? "auto" : "none",
+                  }}
+                >
+                  Start This Plan
+                  <span className="transition-transform duration-200 group-hover/cta:translate-x-0.5">→</span>
+                </Link>
               </div>
             </div>
           );
