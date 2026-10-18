@@ -1,11 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Target, Clock, SlidersHorizontal, Rocket } from "lucide-react";
+import { Target, Clock, SlidersHorizontal, Rocket, CheckCircle2 } from "lucide-react";
 import { productShowcaseSteps } from "@/components/redesign/data";
 import { goalPortfolios } from "@/components/landing/goal-portfolios";
 
 const stepIcons = [Target, Clock, SlidersHorizontal, Rocket];
+
+function VerificationTag({ label }: { label: string }) {
+  return (
+    <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--tf-bg-soft)] px-2.5 py-1 text-[10px] font-semibold text-[var(--tf-blue)]">
+      <CheckCircle2 className="h-3 w-3" strokeWidth={2} />
+      {label}
+    </div>
+  );
+}
 
 function MockFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -44,6 +53,7 @@ function MockScreen({ index }: { index: number }) {
             );
           })}
         </div>
+        <VerificationTag label={productShowcaseSteps[0].tag} />
       </MockFrame>
     );
   }
@@ -64,6 +74,7 @@ function MockScreen({ index }: { index: number }) {
         <div className="mt-8 rounded-[var(--tf-radius-sm)] bg-[var(--tf-bg)] p-4 text-xs text-[var(--tf-text-secondary)]">
           A longer horizon means more room for growth-oriented investments.
         </div>
+        <VerificationTag label={productShowcaseSteps[1].tag} />
       </MockFrame>
     );
   }
@@ -86,6 +97,7 @@ function MockScreen({ index }: { index: number }) {
             )
           )}
         </div>
+        <VerificationTag label={productShowcaseSteps[2].tag} />
       </MockFrame>
     );
   }
@@ -103,6 +115,7 @@ function MockScreen({ index }: { index: number }) {
         <div className="mt-5 w-full rounded-[var(--tf-radius-xs)] bg-[var(--tf-blue)] py-2.5 text-xs font-semibold text-white">
           Start Investing
         </div>
+        <VerificationTag label={productShowcaseSteps[3].tag} />
       </div>
     </MockFrame>
   );

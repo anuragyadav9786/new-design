@@ -53,20 +53,24 @@ export const processSteps = [
 
 export const productShowcaseSteps = [
   {
-    title: "Selecting an investment goal",
+    title: "Select Your Destination",
     description: "Start by choosing exactly what you're investing for — the same five goals you've already explored.",
+    tag: "No Demat Hassle",
   },
   {
-    title: "Choosing an investment horizon",
+    title: "Calibrate Your Timeline & Capital",
     description: "Tell us when you'll need this money. Your horizon shapes how much risk makes sense.",
+    tag: "Instant KYC Validation",
   },
   {
-    title: "Understanding investor preferences",
+    title: "Profile Your Risk Temperament",
     description: "A short set of questions gets a clear read on your risk appetite — no jargon, no guesswork.",
+    tag: "100% Paperless",
   },
   {
-    title: "Beginning the investment journey",
+    title: "Receive Your Asset Blueprint",
     description: "Your structured approach is ready. From here, you start investing with a plan behind every rupee.",
+    tag: "No Demat Hassle",
   },
 ];
 

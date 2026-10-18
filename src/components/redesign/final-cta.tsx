@@ -29,14 +29,23 @@ export default function FinalCta() {
           Start with three minutes today. Understand what your goal may require &mdash; and what an investment
           approach could look like.
         </p>
-        <a
-          href="#assessment"
-          onClick={() => trackEvent("hero_cta_clicked", { cta: "get_my_investment_plan", source: "final_cta" })}
-          className="group mt-10 inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-8 py-4 text-[16px] font-semibold text-white shadow-[0_20px_50px_rgba(var(--tf-blue-rgb),0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-secondary)]"
-        >
-          Get My Investment Plan
-          <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-        </a>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#assessment"
+            onClick={() => trackEvent("hero_cta_clicked", { cta: "build_my_investment_plan", source: "final_cta" })}
+            className="group inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] bg-[var(--tf-blue)] px-8 py-4 text-[16px] font-semibold text-white shadow-[0_20px_50px_rgba(var(--tf-blue-rgb),0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--tf-blue-secondary)]"
+          >
+            Build My Investment Plan
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          </a>
+          <a
+            href="#team"
+            onClick={() => trackEvent("advisor_contact_clicked", { source: "final_cta_discovery_call" })}
+            className="inline-flex items-center gap-2 rounded-[var(--tf-radius-btn)] border border-white/20 px-8 py-4 text-[16px] font-semibold text-white transition-all duration-200 hover:bg-white/10"
+          >
+            Book Discovery Call
+          </a>
+        </div>
         <p className="mt-3 text-sm text-white/50">Free assessment &bull; About 3 minutes &bull; No obligation</p>
 
         <div className="mt-8 flex flex-col items-center gap-3">
